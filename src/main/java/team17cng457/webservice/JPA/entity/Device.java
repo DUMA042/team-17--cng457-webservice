@@ -1,6 +1,8 @@
 package team17cng457.webservice.JPA.entity;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 @Table(name = "device")
