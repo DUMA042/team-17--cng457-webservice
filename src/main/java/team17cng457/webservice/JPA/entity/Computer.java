@@ -1,5 +1,6 @@
 package team17cng457.webservice.JPA.entity;
 
+
 import javax.persistence.Column;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,7 +11,7 @@ import javax.persistence.GeneratedValue;
 @Table(name = "computer")
 
 @Entity
-public class Computer {
+public class Computer extends Device{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "computer_id")
