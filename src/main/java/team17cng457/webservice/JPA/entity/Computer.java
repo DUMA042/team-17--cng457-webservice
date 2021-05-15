@@ -1,17 +1,14 @@
 package team17cng457.webservice.JPA.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
-@Table(name = "device")
-
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 public class Computer extends Device{
+
+    @Column(name = "device_type", insertable = false, updatable = false)
+    private int device_type = 1;
 
     @Column(name = "storage_capacity")
     private int storageCapacity;
