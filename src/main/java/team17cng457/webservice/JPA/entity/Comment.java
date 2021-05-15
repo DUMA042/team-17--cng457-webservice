@@ -1,11 +1,6 @@
 package team17cng457.webservice.JPA.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 
 @Table(name = "comment")
@@ -24,4 +19,6 @@ public class Comment {
     @Column(name = "star_comment")
     private String starComment;
 
+    @ManyToOne(targetEntity = Device.class)
+    private Device device;
 }
