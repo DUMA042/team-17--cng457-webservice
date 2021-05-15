@@ -1,4 +1,4 @@
 package team17cng457.webservice.JPA.entity;
 
-public class Phone {
+public class Phone extends Device{
 }
