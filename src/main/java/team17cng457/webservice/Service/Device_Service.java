@@ -16,9 +16,6 @@ public class Device_Service {
     public List<Device> getdevices(){
         return devicerep.findAll();
     }
-    public List<Device> getdevices_order(long number){
-        /*gets all the number from 0 to n(Number)*/
-        return devicerep.findAll(0,number);
-    }
+
 
 }

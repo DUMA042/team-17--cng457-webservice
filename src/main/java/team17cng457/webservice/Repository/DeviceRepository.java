@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface DeviceRepository extends JpaRepository<Device,Long> {
 
-    List<Device> findAll(int i, long n);
+
 }
