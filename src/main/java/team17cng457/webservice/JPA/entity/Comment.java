@@ -11,7 +11,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "comment_id")
-    private int comment_id;
+    private long comment_id;
 
     @Column(name = "star_rating")
     private int starRating;
@@ -20,5 +20,6 @@ public class Comment {
     private String starComment;
 
     @ManyToOne(targetEntity = Device.class)
+    @JoinColumn(name="device_id")
     private Device device;
 }
