@@ -20,7 +20,7 @@ public class Computer extends Device{
         super(0,Device.COMPUTER_TYPE,brand,model,screenSize,price,null,null);
         this.storagecapacity=storagecapacity;
         this.processor=processor;
-        this.screenResolution=screenResolution;
+        this.screenresolution=screenResolution;
         this.memory=memory;
     }
     @Column(name = "storage_capacity")
@@ -30,7 +30,7 @@ public class Computer extends Device{
     private String processor;
 
     @Column(name = "screen_resolution")
-    private String screenResolution;
+    private String screenresolution;
 
     @Column(name = "memory")
     private int memory;
