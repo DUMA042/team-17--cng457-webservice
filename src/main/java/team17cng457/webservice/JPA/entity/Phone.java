@@ -16,6 +16,10 @@ import javax.persistence.Entity;
 @AllArgsConstructor
 
 public class Phone extends Device{
+
+
+
+
     @Column(name = "Internal Memory")
     private int Internal_memory;
 }

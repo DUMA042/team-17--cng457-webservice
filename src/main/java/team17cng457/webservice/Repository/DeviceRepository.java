@@ -17,4 +17,7 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
     //find phone or computer by brand
     public List<Device> findBydevice_typeAndbrand(int device_type, String brand);
 
+    //find by AdditionalFeature
+    //public List<Device> findBydevice_typeAdditionalfeature(AdditionalFeature feature);
+
 }
