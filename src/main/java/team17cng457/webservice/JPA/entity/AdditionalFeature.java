@@ -14,9 +14,9 @@ import java.util.List;
 public class AdditionalFeature {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "Feature ID")
+    @Column(name = "Feature_id")
     private long feature_id;
-    @Column(name = "Feature Name")
+    @Column(name = "Feature_name")
     String Added_feature;
     @ManyToMany
     List<Device> devices_feature;

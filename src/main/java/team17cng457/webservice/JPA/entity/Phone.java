@@ -6,20 +6,21 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-
+@NoArgsConstructor
+@DiscriminatorValue("1")
 public class Phone extends Device{
-
-
-
-
-    @Column(name = "Internal Memory")
-    private int Internal_memory;
+    public Phone(String brand, String model, String screenSize,float price, int Internal_memory){
+        super(0,Device.COMPUTER_TYPE,brand,model,screenSize,price,null,null);
+        this.internalmemory = Internal_memory;
+    }
+    @Column(name = "internal_memory")
+    private int internalmemory;
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "device")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name = "device_type", discriminatorType = DiscriminatorType.INTEGER, columnDefinition = "INTEGER")
 public class Device {
 
     public static final int COMPUTER_TYPE = 0;
@@ -23,28 +23,28 @@ public class Device {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "device ID")
-    private long device_id;
+    @Column(name = "device_id")
+    protected long deviceid;
 
-    //0 = unknown, 1 = computer, 2 = phone
+    //0 = computer, 1 = phone
     @Column(name = "device_type", insertable = false, updatable = false)
-    private int device_type = COMPUTER_TYPE;
+    protected int devicetype;
 
     @Column(name = "brand")
-    private String brand;
+    protected String brand;
 
     @Column(name = "model")
-    private String model;
+    protected String model;
 
     @Column(name = "screen_size")
-    private String screenSize;
+    protected String screensize;
 
     @Column(name = "price")
-    private float price;
+    protected float price;
 
     @OneToMany
-    private List<Comment> comments;
+    protected List<Comment> comments;
     @ManyToMany
-    private List<AdditionalFeature> features;
+    protected List<AdditionalFeature> features;
 
 }
