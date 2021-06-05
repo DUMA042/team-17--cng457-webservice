@@ -2,6 +2,7 @@ package team17cng457.webservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import team17cng457.webservice.JPA.entity.Comment;
 import team17cng457.webservice.JPA.entity.Computer;
 import team17cng457.webservice.JPA.entity.Device;
 import team17cng457.webservice.JPA.entity.Phone;
@@ -24,6 +25,7 @@ public class DeviceController {
         Computer c1 = new Computer("Dell","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
         Computer c2 = new Computer("Tell","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
         Computer c3 = new Computer("Apple","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
+        //Comment cm1 = new Comment(1,12,"12334",c1);
         device_service.saveDevice(c1);
         device_service.saveDevice(c2);
         device_service.saveDevice(c3);

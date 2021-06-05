@@ -13,6 +13,7 @@ public class Comment_Service {
     public  Comment saveComment(Comment comment){
         return Commentrep.save(comment);
     }
+
     public Comment getComment(long comment_id){
         return  Commentrep.getOne(comment_id);
     }
