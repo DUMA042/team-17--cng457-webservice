@@ -17,33 +17,27 @@ public class DeviceController {
     @Autowired
     DeviceService device_service;
 
-    @PostMapping("/")
-    public String index(@RequestBody Device r){
-        return "Hello";
-    }
-
-    @PostMapping("/error")
-    public String error(@RequestBody Device r){
-        return "Hello";
-    }
-
     @PostMapping("/device/add")
     public Device Save(@RequestBody Device r){
         return device_service.saveDevice(r);
     }
 
-    @GetMapping("/computer/test")
-    public Device testcomputer(){
-        Computer c = new Computer();
+    @GetMapping("/test/populate")
+    public Device PopulateWithTestData(){
+        Computer c1 = new Computer("Dell","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
+        Computer c2 = new Computer("Tell","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
+        Computer c3 = new Computer("Apple","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
+        device_service.saveDevice(c1);
+        device_service.saveDevice(c2);
+        device_service.saveDevice(c3);
 
-        return device_service.saveDevice(c);
-    }
+        Phone p1 = new Phone("Apple", "Iphone 123", "1920x1080", 12312, 4096);
+        Phone p2 = new Phone("Samsung", "sam 123", "1920x1080", 12312, 4096);
+        Phone p3 = new Phone("Xiaomi", "xi 123", "1920x1080", 12312, 4096);
 
-    @GetMapping("/phone/test")
-    public Device testphone(){
-        Phone p = new Phone();
-
-        return device_service.saveDevice(p);
+        device_service.saveDevice(p1);
+        device_service.saveDevice(p2);
+        return device_service.saveDevice(p3);
     }
 
     @GetMapping("/computer/get")
@@ -52,7 +46,7 @@ public class DeviceController {
     }
 
     @GetMapping("/phone/get")
-    public List<Device> GetPhones(){
+    public List<Device> GetPhones() {
         return device_service.FindDevice(Device.PHONE_TYPE);
     }
 
@@ -61,12 +55,12 @@ public class DeviceController {
         return device_service.FindDeviceById(id);
     }
 
-    @GetMapping("/computer/get/{brand}")
+    @GetMapping("/computer/search")
     public List<Device> GetComputerByBrand(String brand){
         return device_service.FindDevice(Device.COMPUTER_TYPE, brand);
     }
 
-    @GetMapping("/phone/get/{brand}")
+    @GetMapping("/phone/search")
     public List<Device> GetPhoneByBrand(String brand){
         return device_service.FindDevice(Device.PHONE_TYPE, brand);
     }
