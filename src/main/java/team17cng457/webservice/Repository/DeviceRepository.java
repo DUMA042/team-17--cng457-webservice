@@ -1,7 +1,9 @@
 package team17cng457.webservice.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import team17cng457.webservice.JPA.entity.Computer;
 import team17cng457.webservice.JPA.entity.Device;
+import team17cng457.webservice.JPA.entity.Phone;
 
 import java.util.List;
 
@@ -17,4 +19,15 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
     //find phone or computer by brand
     public List<Device> findByDevicetypeAndBrand(int devicetype, String brand);
 
+
+    /*public List<Device> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceStartsWithAndStoragecapacityStartsWithAndProcessorstartswithStartsWithAndScreenresolutionStartsWithAndMemoryStartsWith(
+            int devicetype,
+            String brand,
+            String model,
+            String screenSize,float price,
+            int storagecapacity,
+            String processor,
+            String screenResolution,
+            int memory
+    );*/
 }
