@@ -13,9 +13,9 @@ public abstract class Device_Service {
     public Device saveDevice(Device device){
         return devicerep.save(device);
     }
-    //public List<Device> getdevices(){
-    //    return devicerep.findAll();
-    //}
+    public List<Device> getdevices(){
+       return devicerep.findAll();
+    }
 
     public List<Device> FindDevice(int device_type){return devicerep.findBydevice_type(device_type);}
 
