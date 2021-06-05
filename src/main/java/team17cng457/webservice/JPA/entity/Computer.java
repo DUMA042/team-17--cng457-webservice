@@ -12,15 +12,13 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorValue("0")
 public class Computer extends Device{
 
-    @Column(name = "device_type", insertable = false, updatable = false)
-    private int device_type = 1;
-
     @Column(name = "storage_capacity")
-    private int storageCapacity;
+    private int storagecapacity;
 
     @Column(name = "processor")
     private String processor;

@@ -6,16 +6,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-
+@NoArgsConstructor
+@DiscriminatorValue("1")
 public class Phone extends Device{
-    @Column(name = "Internal Memory")
+    @Column(name = "internal_memory")
     private int Internal_memory;
 }
