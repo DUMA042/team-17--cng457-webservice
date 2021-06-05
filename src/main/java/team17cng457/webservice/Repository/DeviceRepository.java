@@ -19,15 +19,29 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
     //find phone or computer by brand
     public List<Device> findByDevicetypeAndBrand(int devicetype, String brand);
 
-
-    /*public List<Device> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceStartsWithAndStoragecapacityStartsWithAndProcessorstartswithStartsWithAndScreenresolutionStartsWithAndMemoryStartsWith(
+    public List<Phone> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndInternalmemoryGreaterThanAndInternalmemoryLessThan(
             int devicetype,
             String brand,
             String model,
-            String screenSize,float price,
-            int storagecapacity,
+            String screensize,
+            float minprice,
+            float maxprice,
+            int mininternalmemory,
+            int maxinternalmemory);
+
+
+    public List<Computer> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
+            int devicetype,
+            String brand,
+            String model,
+            String screenSize,
+            float minprice,
+            float maxprice,
+            int minstoragecapacity,
+            int maxstoragecapacity,
             String processor,
             String screenResolution,
-            int memory
-    );*/
+            int minmemory,
+            int maxmemory
+    );
 }

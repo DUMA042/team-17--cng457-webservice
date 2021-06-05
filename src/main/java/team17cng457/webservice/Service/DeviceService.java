@@ -27,25 +27,47 @@ public class DeviceService {
 
     public List<Device> FindDevice(int type, String brand){return devicerep.findByDevicetypeAndBrand(type,brand);}
 
-
-    /*public List<Device> SearchComputers(String brand,
-                                          String model,
-                                          String screensize,
-                                          float price,
-                                          int storagecapacity,
-                                          String processor,
-                                          String screenResolution,
-                                          int memory){
-        return devicerep.findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceStartsWithAndStoragecapacityStartsWithAndProcessorstartswithStartsWithAndScreenresolutionStartsWithAndMemoryStartsWith(
-                Device.COMPUTER_TYPE,
+    public List<Phone> SearchPhones(String brand,
+                                    String model,
+                                    String screensize,
+                                    float minprice,
+                                    float maxprice,
+                                    int mininternalmemory,
+                                    int maxinternalmemory){
+        return devicerep.findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndInternalmemoryGreaterThanAndInternalmemoryLessThan(
+                Device.PHONE_TYPE,
                 brand,
                 model,
                 screensize,
-                price,
-                storagecapacity,
+                minprice,
+                maxprice,
+                mininternalmemory,
+                maxinternalmemory);
+    }
+    public List<Computer> SearchComputers(String brand,
+                                          String model,
+                                          String screenSize,
+                                          float minprice,
+                                          float maxprice,
+                                          int minstoragecapacity,
+                                          int maxstoragecapacity,
+                                          String processor,
+                                          String screenResolution,
+                                          int minmemory,
+                                          int maxmemory){
+        return devicerep.findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
+                Device.COMPUTER_TYPE,
+                brand,
+                model,
+                screenSize,
+                minprice,
+                maxprice,
+                minstoragecapacity,
+                maxstoragecapacity,
                 processor,
                 screenResolution,
-                memory);
-    }*/
+                minmemory,
+                maxmemory);
+    }
 
 }
