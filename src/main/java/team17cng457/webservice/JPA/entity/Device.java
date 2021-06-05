@@ -24,27 +24,27 @@ public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "device_id")
-    private long deviceid;
+    protected long deviceid;
 
     //0 = computer, 1 = phone
     @Column(name = "device_type", insertable = false, updatable = false)
-    private int devicetype;
+    protected int devicetype;
 
     @Column(name = "brand")
-    private String brand;
+    protected String brand;
 
     @Column(name = "model")
-    private String model;
+    protected String model;
 
     @Column(name = "screen_size")
-    private String screenSize;
+    protected String screenSize;
 
     @Column(name = "price")
-    private float price;
+    protected float price;
 
     @OneToMany
-    private List<Comment> comments;
+    protected List<Comment> comments;
     @ManyToMany
-    private List<AdditionalFeature> features;
+    protected List<AdditionalFeature> features;
 
 }
