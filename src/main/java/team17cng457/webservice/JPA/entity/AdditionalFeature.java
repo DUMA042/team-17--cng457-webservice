@@ -15,9 +15,11 @@ public class AdditionalFeature {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "Feature_id")
-    private long feature_id;
+    private long featureid;
     @Column(name = "Feature_name")
-    String Added_feature;
+    String featurename;
+    @Column(name = "feature_value")
+    String featurevalue;
     @ManyToMany
-    List<Device> devices_feature;
+    List<Device> devicesfeature;
 }
