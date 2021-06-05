@@ -19,6 +19,9 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
     //find phone or computer by brand
     public List<Device> findByDevicetypeAndBrand(int devicetype, String brand);
 
+    //I hate that this is possible and that it works.
+    //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
+    //IT JUST WORKS
     public List<Phone> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndInternalmemoryGreaterThanAndInternalmemoryLessThan(
             int devicetype,
             String brand,
@@ -30,6 +33,9 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
             int maxinternalmemory);
 
 
+    //I hate that this is possible and that it works.
+    //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
+    //IT JUST WORKS
     public List<Computer> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
             int devicetype,
             String brand,

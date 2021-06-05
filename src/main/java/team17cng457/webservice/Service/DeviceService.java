@@ -34,6 +34,9 @@ public class DeviceService {
                                     float maxprice,
                                     int mininternalmemory,
                                     int maxinternalmemory){
+        //I hate that this is possible and that it works.
+        //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
+        //IT JUST WORKS
         return devicerep.findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndInternalmemoryGreaterThanAndInternalmemoryLessThan(
                 Device.PHONE_TYPE,
                 brand,
@@ -55,6 +58,9 @@ public class DeviceService {
                                           String screenResolution,
                                           int minmemory,
                                           int maxmemory){
+        //I hate that this is possible and that it works.
+        //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
+        //IT JUST WORKS
         return devicerep.findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
                 Device.COMPUTER_TYPE,
                 brand,
