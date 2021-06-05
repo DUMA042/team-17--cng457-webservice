@@ -20,6 +20,16 @@ public class DeviceController {
         return device_service.saveDevice(r);
     }
 
+    @PostMapping("/phone/add")
+    public Device Save(@RequestBody Phone r){
+        return device_service.saveDevice(r);
+    }
+
+    @PostMapping("/computer/add")
+    public Device Save(@RequestBody Computer r){
+        return device_service.saveDevice(r);
+    }
+
     @GetMapping("/computer/get")
     public List<Device> GetComputers(){
         return device_service.FindDevice(Device.COMPUTER_TYPE);
