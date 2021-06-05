@@ -19,8 +19,8 @@ import javax.persistence.Entity;
 public class Phone extends Device{
     public Phone(String brand, String model, String screenSize,float price, int Internal_memory){
         super(0,Device.COMPUTER_TYPE,brand,model,screenSize,price,null,null);
-        this.Internal_memory = Internal_memory;
+        this.internalmemory = Internal_memory;
     }
     @Column(name = "internal_memory")
-    private int Internal_memory;
+    private int internalmemory;
 }

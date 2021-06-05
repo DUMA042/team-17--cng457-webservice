@@ -37,7 +37,7 @@ public class Device {
     protected String model;
 
     @Column(name = "screen_size")
-    protected String screenSize;
+    protected String screensize;
 
     @Column(name = "price")
     protected float price;
