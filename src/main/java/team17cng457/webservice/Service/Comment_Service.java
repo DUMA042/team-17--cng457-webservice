@@ -17,6 +17,6 @@ public class Comment_Service {
     }
 
     public Comment getComment(long comment_id){
-        return  Commentrep.getOne(comment_id);
+        return  Commentrep.findCommentBycommentid(comment_id);
     }
 }

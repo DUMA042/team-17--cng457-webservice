@@ -18,7 +18,7 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "comment_id")
-    private long commentID;
+    private long commentid;
 
     @Column(name = "star_rating")
     private int starRating;

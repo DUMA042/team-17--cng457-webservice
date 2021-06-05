@@ -21,15 +21,12 @@ public class CommentController {
     public Comment Save(@RequestBody Comment comment){
         return comment_service.saveComment(comment);
     }
-/*
-    @GetMapping("/test/populate")
-    public Comment PopulateWithTestData(){
-        Computer c1 = new Computer("Dell","D1239", "1920x1080",12941,2048,"Intel 1234", "1920x1080",16900);
 
-        Comment cm1 = new Comment(1,12,"12334",c1);
-        comment_service.saveComment(cm1);
-        return cm1;
-    }*/
+    @GetMapping("/Comment/get")
+    public Comment getComment(int id){
+        return comment_service.getComment(id);
+    }
+
 
 
 }
