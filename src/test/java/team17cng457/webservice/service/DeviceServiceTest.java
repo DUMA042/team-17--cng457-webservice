@@ -1,17 +1,19 @@
 package team17cng457.webservice.service;
 
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.event.annotation.BeforeTestClass;
+import org.springframework.test.context.junit4.SpringRunner;
 import team17cng457.webservice.JPA.entity.Computer;
 import team17cng457.webservice.JPA.entity.Device;
 import team17cng457.webservice.JPA.entity.Phone;
@@ -20,66 +22,83 @@ import team17cng457.webservice.Service.DeviceService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-class DeviceServiceTest {
 
-    @InjectMocks
-    DeviceService deviceService;
+//springboottest is used for constant operations, which are directly tested from database
+@RunWith(SpringRunner.class)
+@ActiveProfiles("test")
+@SpringBootTest
+//@ExtendWith(MockitoExtension.class)
+class DeviceServiceTest extends DeviceService{
 
+    // I don't like mockito. Too cumbersome to mock the whole JPA repository.
+    // I feel like staging database with seperate environment is much more preferable
+    // (Controlled by seperate application.properties file via @ActiveProfiles)
+    /*@InjectMocks
+    DeviceService mockDeviceService;
     @Mock
-    DeviceRepository mockDeviceRepository;
-    
+    DeviceRepository mockDeviceRepository;*/
 
+
+    //Reinitialize staging database before each test case
+    // (so no false positive/negatives from test cases influencing each other)
     @BeforeEach
-    void initMockDeviceRepo(){
+    void initStagingDB(){
+        System.out.println("Initializing staging database");
         Device d1 = new Computer("Dell","d1","16",1200,1024,"Intel i7-6969","1920x1080",16000);
-
-        Device d2 = new Computer("Tell","d2","18",2200,512,"Intel i7-7979","1920x1080",24000);
-
-
-        Device d3 = new Phone("Samsung", "d3", "5\"", 800, 4096);
-
+        Device d2 = new Computer("Tell","d2","18",2200,124,"AMD r7979","1920x1080",24000);
+        Device d3 = new Phone("Samsung", "d3", "5\"", 700, 4096);
         Device d4 = new Phone("Apple", "d4", "6\"", 1800, 2096);
+        Device d5 = new Phone("Xiaomi", "d5", "6\"", 512, 400);
 
+        this.saveDevice(d1);
+        this.saveDevice(d2);
+        this.saveDevice(d3);
+        this.saveDevice(d4);
+        this.saveDevice(d5);
+
+        // OLD MOCKITO STYLE TESTING (I DONT LIKE THIS SORRY)
+        /*
         List<Device> phones = new ArrayList<>();
         List<Device> computers = new ArrayList<>();
         computers.add(d1);
         computers.add(d2);
         phones.add(d3);
         phones.add(d4);
-
         List<Device> devices = new ArrayList<>();
-        devices.add(d1);
-        //devices.add(d2);
-        //devices.add(d3);
-        //devices.add(d4);
 
-        deviceRepository.saveAll(computers);
-        deviceRepository.saveAll(phones);
-        lenient().when(deviceRepository.findBydevicetype(Device.COMPUTER_TYPE)).thenReturn(new ArrayList<Device>(computers));
+        mockDeviceRepository.saveAll(computers);
+        mockDeviceRepository.saveAll(phones);
+        lenient().when(mockDeviceRepository.findBydevicetype(Device.COMPUTER_TYPE)).thenReturn(new ArrayList<Device>(computers));
+        lenient().when(mockDeviceRepository.findBydevicetype(Device.PHONE_TYPE)).thenReturn(new ArrayList<Device>(phones));*/
 
-        lenient().when(deviceRepository.findBydevicetype(Device.PHONE_TYPE)).thenReturn(new ArrayList<Device>(phones));
-
-        lenient().when(deviceRepository.findBydeviceid(any(Integer.class))).thenReturn(new ArrayList<Device>(devices));
     }
 
+    @AfterEach
+    void cleanupStagingDB(){
+        this.DeleteAll();
+    }
+
+
+    //Test if init staging db was successful
     @Test
-    void findPhones(){
-        List<Device> phones = deviceRepository.findBydevicetype(Device.PHONE_TYPE);
+    void TestFindPhones(){
+        List<Device> phones = this.FindDevice(Device.PHONE_TYPE);
         Assertions.assertEquals(phones.get(0).getBrand(), "Samsung");
         Assertions.assertEquals(phones.get(0).getModel(), "d3");
         Assertions.assertEquals(phones.get(1).getBrand(), "Apple");
         Assertions.assertEquals(phones.get(1).getModel(), "d4");
     }
 
+    //Test if init staging db was successful
     @Test
-    void findComputers(){
-        List<Device> computers = deviceRepository.findBydevicetype(Device.COMPUTER_TYPE);
+    void TestFindComputers(){
+        List<Device> computers = this.FindDevice(Device.COMPUTER_TYPE);
         Assertions.assertEquals(computers.get(0).getBrand(), "Dell");
         Assertions.assertEquals(computers.get(0).getModel(), "d1");
         Assertions.assertEquals(computers.get(1).getBrand(), "Tell");
