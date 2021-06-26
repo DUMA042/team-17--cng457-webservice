@@ -7,21 +7,52 @@ import team17cng457.webservice.JPA.entity.Phone;
 
 import java.util.List;
 
-
+/**
+ *  JPA repository for devices
+ */
 public interface DeviceRepository extends JpaRepository<Device,Long> {
 
-    //find all computers or phones
+    /**
+     *  find all computers or phones
+     * @param device_type type of the device to find. Device.PHONE_TYPE or Device.COMPUTER_TYPE.
+     * @return JSONArray of all the devices of that type
+     */
     public List<Device> findBydevicetype(int device_type);
 
-    //find specific device (phone or computer)
+    /**
+     *  find specific device (phone or computer)
+     * @param device_id id of the device to find
+     * @return Requested device
+     */
     public List<Device> findBydeviceid(long device_id);
 
-    //find phone or computer by brand
+    /**
+     *  find phone or computer by brand
+     * @param devicetype type of the device to find. Device.PHONE_TYPE or Device.COMPUTER_TYPE.
+     * @param brand Brand of the phone to find
+     * @return List of all the devices with given brand
+     */
     public List<Device> findByDevicetypeAndBrand(int devicetype, String brand);
 
     //I hate that this is possible and that it works.
     //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
     //IT JUST WORKS
+
+    /**
+     *  Search. With all optional parameters
+     *
+     * IT JUST WORKS
+     * I was hoping i wouldn't need to document this one
+     * @param devicetype type of the device to find. Device.PHONE_TYPE or Device.COMPUTER_TYPE.
+     * @param brand Optional brand name to match.
+     * @param model Optional device model
+     * @param screensize Optional screensize for the device.
+     * @param minprice minimum price for the devices to find
+     * @param maxprice maximum price for the devices to find
+     * @param mininternalmemory minimum memory for devices to find
+     * @param maxinternalmemory maximum memory for devices to find.
+     * @return List of all matching phones
+     */
     public List<Phone> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndInternalmemoryGreaterThanAndInternalmemoryLessThan(
             int devicetype,
             String brand,
@@ -32,7 +63,22 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
             int mininternalmemory,
             int maxinternalmemory);
 
-    //IT JUST WORKS
+    /**
+     *
+     * @param devicetype type of the device to find. Device.PHONE_TYPE or Device.COMPUTER_TYPE.
+     * @param brand Optional brand name to match.
+     * @param model Optional device model
+     * @param screenSize Optional screensize for the device.
+     * @param minprice minimum price for the devices to find
+     * @param maxprice maximum price for the devices to find
+     * @param minstoragecapacity minimum hard disk space for devices to find
+     * @param maxstoragecapacity maximum hard disk space for devices to find
+     * @param processor Optional processor name
+     * @param screenResolution Screem resolution, like 1920x1080
+     * @param minmemory minimum memory for devices to find
+     * @param maxmemory maximum memory for devices to find.
+     * @return List of all matching devices
+     */
     public List<Computer> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
             int devicetype,
             String brand,

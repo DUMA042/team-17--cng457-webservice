@@ -1,39 +1,30 @@
-package team17cng457.webservice.service;
+package team17cng457.webservice.Service;
 
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
 import org.springframework.test.context.junit4.SpringRunner;
 import team17cng457.webservice.JPA.entity.Computer;
 import team17cng457.webservice.JPA.entity.Device;
 import team17cng457.webservice.JPA.entity.Phone;
-import team17cng457.webservice.Repository.DeviceRepository;
-import team17cng457.webservice.Service.DeviceService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 
-//springboottest is used for constant operations, which are directly tested from database
+/**
+ *  Test class for testing Device Controller
+ *  Uses the application-test.properties file for staging environment.
+ *
+ *  DOES NOT work on the production data
+ */
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @SpringBootTest
-//@ExtendWith(MockitoExtension.class)
 class DeviceServiceTest extends DeviceService{
 
     // I don't like mockito. Too cumbersome to mock the whole JPA repository.
@@ -45,8 +36,10 @@ class DeviceServiceTest extends DeviceService{
     DeviceRepository mockDeviceRepository;*/
 
 
-    //Reinitialize staging database before each test case
-    // (so no false positive/negatives from test cases influencing each other)
+    /**
+     * Reinitialize staging database before each test case
+     * (so no false positive/negatives from test cases influencing each other)
+     */
     @BeforeEach
     void initStagingDB(){
         System.out.println("Initializing staging database");
@@ -79,13 +72,18 @@ class DeviceServiceTest extends DeviceService{
 
     }
 
+    /**
+     * Cleanup the staging database after each run
+     */
     @AfterEach
     void cleanupStagingDB(){
         this.DeleteAll();
     }
 
 
-    //Test if init staging db was successful
+    /**
+     * Test if init staging db was successful
+     */
     @Test
     void TestFindPhones(){
         List<Device> phones = this.FindDevice(Device.PHONE_TYPE);
@@ -95,7 +93,9 @@ class DeviceServiceTest extends DeviceService{
         Assertions.assertEquals(phones.get(1).getModel(), "d4");
     }
 
-    //Test if init staging db was successful
+    /**
+     * Test if init staging db was successful
+     */
     @Test
     void TestFindComputers(){
         List<Device> computers = this.FindDevice(Device.COMPUTER_TYPE);
@@ -106,7 +106,9 @@ class DeviceServiceTest extends DeviceService{
 
     }
 
-    //Generate a random device and save it in the repository. Check if it exists.
+    /**
+     * Generate a random device and save it in the repository. Check if it exists.
+     */
     @Test
     void TestSaveDevice(){
         UUID uuid = java.util.UUID.randomUUID();
@@ -118,7 +120,9 @@ class DeviceServiceTest extends DeviceService{
         Assertions.assertEquals(uuid.toString(), d2.getBrand());
     }
 
-    //Test search by price range
+    /**
+     * Test search by price range
+     */
     @Test 
     void TestSearchPhonePriceLimit(){
         Device d1 = this.SearchPhones("", "", "",500,1500,0,999999).get(0);
@@ -126,42 +130,54 @@ class DeviceServiceTest extends DeviceService{
         Assertions.assertTrue(d1.getPrice() < 1500);
     }
 
-    //Test impossible query and assert result size as 0 (min price larger than maxprice)
+    /**
+     * Test impossible query and assert result size as 0 (min price larger than maxprice)
+     */
     @Test 
     void TestBadSearchPhonePriceLimit(){
         List<Phone> phones = this.SearchPhones("", "", "",1500,1000,0,999999);
         Assertions.assertEquals(phones.size(), 0);
     }
 
-    //Search phone by brand
+    /**
+     * Search phone by brand
+     */
     @Test 
     void searchPhoneBrand(){
         Device d1 = this.SearchPhones("Apple", "", "",0,999999,0,999999).get(0);
         Assertions.assertEquals(d1.getBrand(), "Apple");
     }
 
-    //Search phone by memory
+    /**
+     * Search phone by memory
+     */
     @Test 
     void searchPhoneMemory(){
         Phone p1 = this.SearchPhones("", "", "",0,999999,0,500).get(0);
         Assertions.assertTrue(p1.getInternalmemory() < 500);
     }
 
-    //Search computer by screensize
+    /**
+     * Search computer by screensize
+     */
     @Test 
     void searchComputerScreensize(){
         Computer c1 = this.SearchComputers("", "", "",0,999999,0,999999,"", "1920x1080", 0,9999999).get(0);
         Assertions.assertEquals(c1.getScreenresolution(), "1920x1080");
     }
 
-    //Search computer by storage
+    /**
+     * Search computer by storage
+     */
     @Test 
     void searchComputerStorage(){
         Computer c1 = this.SearchComputers("", "", "",0,999999,0,500,"", "", 0,9999999).get(0);
         Assertions.assertTrue(c1.getStoragecapacity() < 500);
     }
 
-    //Search computer by processor
+    /**
+     * Search computer by processor
+     */
     @Test 
     void searchComputerProcessor(){
         Computer c1 = this.SearchComputers("", "", "",0,999999,0,999999,"AMD", "", 0,9999999).get(0);
