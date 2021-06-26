@@ -27,6 +27,8 @@ public class DeviceService {
 
     public List<Device> FindDevice(int type, String brand){return devicerep.findByDevicetypeAndBrand(type,brand);}
 
+    public void DeleteAll(){devicerep.deleteAll();}
+
     public List<Phone> SearchPhones(String brand,
                                     String model,
                                     String screensize,
