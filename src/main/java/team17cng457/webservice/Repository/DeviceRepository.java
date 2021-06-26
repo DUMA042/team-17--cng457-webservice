@@ -32,9 +32,6 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
             int mininternalmemory,
             int maxinternalmemory);
 
-
-    //I hate that this is possible and that it works.
-    //While i'm having so much fun because of this, im sure i saw way, way worse stuff in production.
     //IT JUST WORKS
     public List<Computer> findByDevicetypeAndBrandStartsWithAndModelStartsWithAndScreensizeStartsWithAndPriceGreaterThanAndPriceLessThanAndStoragecapacityGreaterThanAndStoragecapacityLessThanAndProcessorStartsWithAndScreenresolutionStartsWithAndMemoryGreaterThanAndMemoryLessThan(
             int devicetype,
