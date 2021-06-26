@@ -106,22 +106,65 @@ class DeviceServiceTest extends DeviceService{
 
     }
 
+    //Generate a random device and save it in the repository. Check if it exists.
     @Test
-    void findDeviceById(){
-        Device d1 = deviceRepository.findBydeviceid(0).get(0);
+    void TestSaveDevice(){
+        UUID uuid = java.util.UUID.randomUUID();
+        Device d1 = new Computer(uuid.toString(), uuid.toString(),"16",1200,1024,"Intel i7-6969","1920x1080",16000);
+        this.saveDevice(d1);
+        Device d2 = this.SearchComputers(uuid.toString(), uuid.toString(), "",0,999999,0,999999,"", "", 0,9999999).get(0);
 
-        Assertions.assertEquals(d1.getModel(), "d1");
+        Assertions.assertEquals(d1.getBrand(), d2.getBrand());
+        Assertions.assertEquals(uuid.toString(), d2.getBrand());
     }
 
-    @Test
-    void searchPhone(){
-
+    //Test search by price range
+    @Test 
+    void TestSearchPhonePriceLimit(){
+        Device d1 = this.SearchPhones("", "", "",500,1500,0,999999).get(0);
+        Assertions.assertTrue(d1.getPrice() > 500);
+        Assertions.assertTrue(d1.getPrice() < 1500);
     }
 
-    @Test
-    void searchComputer(){
-
+    //Test impossible query and assert result size as 0 (min price larger than maxprice)
+    @Test 
+    void TestBadSearchPhonePriceLimit(){
+        List<Phone> phones = this.SearchPhones("", "", "",1500,1000,0,999999);
+        Assertions.assertEquals(phones.size(), 0);
     }
 
+    //Search phone by brand
+    @Test 
+    void searchPhoneBrand(){
+        Device d1 = this.SearchPhones("Apple", "", "",0,999999,0,999999).get(0);
+        Assertions.assertEquals(d1.getBrand(), "Apple");
+    }
 
+    //Search phone by memory
+    @Test 
+    void searchPhoneMemory(){
+        Phone p1 = this.SearchPhones("", "", "",0,999999,0,500).get(0);
+        Assertions.assertTrue(p1.getInternalmemory() < 500);
+    }
+
+    //Search computer by screensize
+    @Test 
+    void searchComputerScreensize(){
+        Computer c1 = this.SearchComputers("", "", "",0,999999,0,999999,"", "1920x1080", 0,9999999).get(0);
+        Assertions.assertEquals(c1.getScreenresolution(), "1920x1080");
+    }
+
+    //Search computer by storage
+    @Test 
+    void searchComputerStorage(){
+        Computer c1 = this.SearchComputers("", "", "",0,999999,0,500,"", "", 0,9999999).get(0);
+        Assertions.assertTrue(c1.getStoragecapacity() < 500);
+    }
+
+    //Search computer by processor
+    @Test 
+    void searchComputerProcessor(){
+        Computer c1 = this.SearchComputers("", "", "",0,999999,0,999999,"AMD", "", 0,9999999).get(0);
+        Assertions.assertTrue(c1.getProcessor().startsWith("AMD"));
+    }
 }
