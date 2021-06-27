@@ -1,5 +1,7 @@
 package team17cng457.webservice.JPA.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -74,8 +76,13 @@ public class Device {
     /**
      *  mapping for comments on this device
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
     protected List<Comment> comments;
+
+    public void addComment(Comment c){
+        comments.add(c);
+    }
 
     /**
      *  mapping for any additional features this device might have

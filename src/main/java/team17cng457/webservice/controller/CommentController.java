@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import team17cng457.webservice.JPA.entity.Comment;
 import team17cng457.webservice.Service.Comment_Service;
+import team17cng457.webservice.Service.DeviceService;
 
 
 /**
@@ -20,6 +21,9 @@ public class CommentController {
     @Autowired
     Comment_Service comment_service;
 
+    @Autowired
+    DeviceService device_service;
+
     /**
      *  Post request mapping for adding a comment.
      * @param comment JSON Serialized comment from post request body
@@ -27,6 +31,7 @@ public class CommentController {
      */
     @PostMapping("/Comment/add")
     public Comment Save(@RequestBody Comment comment){
+        device_service.FindDeviceById(comment.getDevice().getDeviceid()).get(0).addComment(comment);
         return comment_service.saveComment(comment);
     }
 
@@ -39,6 +44,9 @@ public class CommentController {
     public Comment getComment(int id){
         return comment_service.getComment(id);
     }
+
+
+
 
 
 

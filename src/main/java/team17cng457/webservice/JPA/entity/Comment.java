@@ -1,5 +1,7 @@
 package team17cng457.webservice.JPA.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,6 +41,7 @@ public class Comment {
     /**
      *  m2o relation for comments and devices
      */
+    @JsonBackReference("deviceid")
     @ManyToOne(targetEntity = Device.class)
     @JoinColumn(name="device_id")
     private Device device;
