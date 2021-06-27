@@ -3,9 +3,11 @@ package team17cng457.webservice.JPA.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Lock;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
