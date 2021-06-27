@@ -1,17 +1,28 @@
 package team17cng457.webservice.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.transaction.annotation.Transactional;
 import team17cng457.webservice.JPA.entity.Computer;
 import team17cng457.webservice.JPA.entity.Device;
 import team17cng457.webservice.JPA.entity.Phone;
 
+import javax.persistence.LockModeType;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *  JPA repository for devices
  */
 public interface DeviceRepository extends JpaRepository<Device,Long> {
 
+    /**
+     * Save a device
+     * @param d Device to save
+     * @return saved devicez
+     */
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    public Device save(Device d);
     /**
      *  find all computers or phones
      * @param device_type type of the device to find. Device.PHONE_TYPE or Device.COMPUTER_TYPE.
@@ -93,4 +104,5 @@ public interface DeviceRepository extends JpaRepository<Device,Long> {
             int minmemory,
             int maxmemory
     );
+
 }
